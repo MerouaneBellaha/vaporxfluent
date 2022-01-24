@@ -1,14 +1,23 @@
-import Fluent
+//
+//  File.swift
+//  
+//
+//  Created by Merouane Bellaha on 01/01/2022.
+//
 
-struct CreateTodo: Migration {
+import Foundation
+import Fluent
+import FluentPostgresDriver
+
+struct CreateMovie: Migration {
     func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("todos")
+        database.schema("movies")
             .id()
             .field("title", .string, .required)
             .create()
     }
-
+    
     func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("todos").delete()
+        database.schema("movies").delete()
     }
 }
